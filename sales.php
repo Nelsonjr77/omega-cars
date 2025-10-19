@@ -47,29 +47,36 @@ if (isset($_POST['vender'])) {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registrar venta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar venta - Omega Cars</title>
   <link rel="stylesheet" href="assets/css/sales.css">
 </head>
 <body>
   <div class="container">
-    <h2>Registrar nueva venta</h2>
-    <form method="POST">
-      <input type="text" name="cliente_nombre" placeholder="Nombre del cliente" required><br>
-      <input type="email" name="cliente_email" placeholder="Correo del cliente" required><br>
-      <input type="text" name="cliente_telefono" placeholder="Teléfono del cliente" required><br>
+    <div class="header">
+      <h2>Registrar Nueva Venta</h2>
+      <a href="dashboard.php" class="back-link">← Volver al Dashboard</a>
+    </div>
 
-      <select name="producto_id" required>
-        <option value="">Seleccionar producto</option>
-        <?php while ($p = $productos->fetch_assoc()): ?>
-          <option value="<?php echo $p['id']; ?>">
-            <?php echo $p['marca'] . " - $" . $p['precio']; ?>
-          </option>
-        <?php endwhile; ?>
-      </select><br>
+    <div class="form-section">
+      <form method="POST">
+        <input type="text" name="cliente_nombre" placeholder="Nombre del cliente" required>
+        <input type="email" name="cliente_email" placeholder="Correo del cliente" required>
+        <input type="text" name="cliente_telefono" placeholder="Teléfono del cliente" required>
 
-      <input type="number" name="cantidad" placeholder="Cantidad" required><br>
-      <button type="submit" name="vender">Confirmar venta y generar PDF</button>
-    </form>
+        <select name="producto_id" required>
+          <option value="">Seleccionar producto</option>
+          <?php while ($p = $productos->fetch_assoc()): ?>
+            <option value="<?php echo $p['id']; ?>">
+              <?php echo htmlspecialchars($p['marca']) . " - $" . number_format($p['precio'], 2); ?>
+            </option>
+          <?php endwhile; ?>
+        </select>
+
+        <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
+        <button type="submit" name="vender"><span>Confirmar Venta y Generar PDF</span></button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

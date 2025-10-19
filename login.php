@@ -36,13 +36,14 @@ if (isset($_POST['login'])) {
 <body>
   <div class="container">
     <h2>Iniciar sesión</h2>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+    <?php if (isset($error)) echo "<div class='error'>$error</div>"; ?>
     <form method="POST" action="">
-      <input type="email" name="email" placeholder="Correo electrónico" required><br>
-      <input type="password" name="contraseña" placeholder="Contraseña" required><br>
-      <button type="submit" name="login">Entrar</button>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="password" name="contraseña" placeholder="Contraseña" required>
+      <button type="submit" name="login"><span>Entrar</span></button>
     </form>
     <p><a href="recover.php">¿Olvidaste tu contraseña?</a></p>
+    <p>¿No tienes cuenta? <a href="register.php">Regístrate aquí</a></p>
   </div>
 </body>
 </html>

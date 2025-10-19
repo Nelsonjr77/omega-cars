@@ -71,33 +71,47 @@ if (isset($_POST['actualizar'])) {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Recuperar contraseña</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña - Omega Cars</title>
   <link rel="stylesheet" href="assets/css/recover.css">
 </head>
 <body>
   <div class="container">
     <h2>Recuperar contraseña</h2>
-    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+
+    <?php if ($etapa === 1): ?>
+      <p class="stage-indicator">Paso 1 de 3: Buscar cuenta</p>
+    <?php elseif ($etapa === 2): ?>
+      <p class="stage-indicator">Paso 2 de 3: Responder preguntas de seguridad</p>
+    <?php elseif ($etapa === 3): ?>
+      <p class="stage-indicator">Paso 3 de 3: Crear nueva contraseña</p>
+    <?php endif; ?>
+
+    <?php if (isset($error)) echo "<div class='error'>$error</div>"; ?>
 
     <?php if ($etapa === 1): ?>
       <form method="POST">
-        <input type="email" name="email" placeholder="Correo registrado" required><br>
-        <button type="submit" name="buscar">Buscar</button>
+        <input type="email" name="email" placeholder="Correo registrado" required>
+        <button type="submit" name="buscar"><span>Buscar cuenta</span></button>
       </form>
+      <p><a href="login.php">Volver al inicio de sesión</a></p>
     <?php elseif ($etapa === 2): ?>
       <form method="POST">
-        <p><?php echo $preguntas[0]; ?></p>
-        <input type="text" name="r1" required><br>
-        <p><?php echo $preguntas[1]; ?></p>
-        <input type="text" name="r2" required><br>
-        <p><?php echo $preguntas[2]; ?></p>
-        <input type="text" name="r3" required><br>
-        <button type="submit" name="validar">Validar respuestas</button>
+        <label class="question-label"><?php echo htmlspecialchars($preguntas[0]); ?></label>
+        <input type="text" name="r1" placeholder="Respuesta 1" required>
+
+        <label class="question-label"><?php echo htmlspecialchars($preguntas[1]); ?></label>
+        <input type="text" name="r2" placeholder="Respuesta 2" required>
+
+        <label class="question-label"><?php echo htmlspecialchars($preguntas[2]); ?></label>
+        <input type="text" name="r3" placeholder="Respuesta 3" required>
+
+        <button type="submit" name="validar"><span>Validar respuestas</span></button>
       </form>
     <?php elseif ($etapa === 3): ?>
       <form method="POST">
-        <input type="password" name="nueva" placeholder="Nueva contraseña" required><br>
-        <button type="submit" name="actualizar">Actualizar contraseña</button>
+        <input type="password" name="nueva" placeholder="Nueva contraseña" required minlength="6">
+        <button type="submit" name="actualizar"><span>Actualizar contraseña</span></button>
       </form>
     <?php endif; ?>
   </div>

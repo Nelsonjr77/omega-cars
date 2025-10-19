@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Omega Cars Boutique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omega Cars Boutique - Sistema de Gestión</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
